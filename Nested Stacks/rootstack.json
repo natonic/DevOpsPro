@@ -1,0 +1,12 @@
+{
+    "AWSTemplateFormatVersion" : "2010-09-09",
+    "Resources" : {
+        "myStack" : {
+	       "Type" : "AWS::CloudFormation::Stack",
+	       "Properties" : {
+              "TemplateURL" : "https://s3.amazonaws.com/nestedstack945/s3static.json",
+              "TimeoutInMinutes" : "60"
+	       }
+        }
+    }
+}
