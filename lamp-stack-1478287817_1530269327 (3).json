@@ -162,7 +162,7 @@
                   "[main]\n",
                   "stack=", { "Ref" : "AWS::StackId" }, "\n",
                   "region=", { "Ref" : "AWS::Region" }, "\n",
-                  "interval=6", "\n",
+                  "interval=6", "\n"
                 ]]},
                 "mode"    : "000400",
                 "owner"   : "root",
@@ -237,7 +237,7 @@
              "         --stack ", { "Ref" : "AWS::StackName" },
              "         --resource WebServerInstance ",
              "         --region ", { "Ref" : "AWS::Region" }, "\n"
-        ]]}},        
+        ]]}}
       },
       "CreationPolicy" : {
         "ResourceSignal" : {
