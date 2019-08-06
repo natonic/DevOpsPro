@@ -1,0 +1,57 @@
+{
+    "Statement" : [
+      {
+        "Effect" : "Allow",
+        "Action" : "Update:*",
+        "Principal": "*",
+        "Resource" : "*"
+      },
+      {
+        "Effect" : "Deny",
+        "Action" : "Update:*",
+        "Principal": "*",
+        "Resource" : "LogicalResourceId/wordpressdb"
+      }
+    ]
+  }
+
+
+  {
+    "Statement" : [
+      {
+        "Effect" : "Deny_or_Allow",
+        "Action" : "update_actions",
+        "Principal" : "*",
+        "Resource" : "LogicalResourceId/resource_logical_ID",
+        "Condition" : {
+          "StringEquals_or_StringLike" : {
+            "ResourceType" : [resource_type, ...]
+          }
+        }
+      }  
+    ]
+  }
+
+
+  {
+    "Statement" : [
+    {
+      "Effect" : "Deny",
+      "Principal" : "*",
+      "Action" : "Update:*",
+      "Resource" : "*",
+      "Condition" : {
+        "StringEquals" : {
+          "ResourceType" : ["AWS::EC2::Instance", "AWS::RDS::DBInstance"]
+        }
+      }
+    },
+    {
+      "Effect" : "Allow",
+      "Principal" : "*",
+      "Action" : "Update:*",
+      "Resource" : "*"
+    }
+    ]
+  }
+
