@@ -1,0 +1,15 @@
+aws autoscaling put-scaling-policy --policy-name sqs-scaleout --auto-scaling-group-name ASG4SQS --scaling-adjustment 1 --adjustment-type ChangeInCapacity
+
+aws autoscaling put-scaling-policy --policy-name sqs-scalein --auto-scaling-group-name ASG4SQS --scaling-adjustment -1 --adjustment-type ChangeInCapacity
+
+aws cloudwatch put-metric-alarm --alarm-name AddCapacityToProcessQueue --metric-name ApproximateNumberOfMessagesVisible --namespace “AWS/SQS” --statistic Average --period 300 --threshold 3 --comparison-operator GreaterThanOrEqualToThreshold --dimensions Name=QueueName, Value=SQS4ASG.fifo --evaluation-periods 2 --alarm-actions arn:aws:<REGION>:<ACCOUNT NUMBER>:scalingPolicy:<Policy ID>:autoScalingGroupName/ASG4SQS:policyName/sqs-scaleout
+
+aws cloudwatch put-metric-alarm --alarm-name RemoveCapacityFromProcessQueue --metric-name ApproximateNumberOfMessagesVisible --namespace “AWS/SQS” --statistic Average --period 300 --threshold 1 --comparison-operator LessThanOrEqualToThreshold --dimensions Name=QueueName, Value=SQS4ASG.fifo --evaluation-periods 2 --alarm-actions arn:aws:<REGION>:<ACCOUNT NUMBER>:scalingPolicy:<Policy ID>:autoScalingGroupName/ASG4SQS:policyName/sqs-scalein
+
+aws cloudwatch describe-alarms --alarm-names AddCapacityToProcessQueue RemoveCapacityFromProcessQueue
+
+aws autoscaling describe-policies --auto-scaling-group-name ASG4SQS
+
+
+
+
